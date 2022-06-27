@@ -112,6 +112,10 @@ TARGET_COPY_OUT_VENDOR := system/vendor
 # Device Tree
 BOARD_USES_DT := true
 
+# libinit
+TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):init_universal8895
+TARGET_RECOVERY_DEVICE_MODULES := libinit_universal8895
+
 # Renderscript
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
