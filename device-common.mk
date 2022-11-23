@@ -18,6 +18,8 @@ COMMON_PATH := device/samsung/universal8895-common
 
 # Shipping API
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_n.mk)
+# Debug tools
+$(call inherit-product, $(COMMON_PATH)/debug-tools/debug.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
