@@ -26,7 +26,7 @@ DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.service.universal8895 \
-    android.hardware.audio@7.1-impl:32 \
+    android.hardware.audio@7.0-impl:32 \
     android.hardware.audio.effect@7.0-impl:32 \
     android.hardware.bluetooth.audio@2.0-impl \
     audio.bluetooth.default \
