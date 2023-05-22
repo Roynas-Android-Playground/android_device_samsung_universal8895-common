@@ -284,6 +284,11 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
 
+# Samsung Ext Flash
+PRODUCT_PACKAGES += \
+    vendor.samsung_ext.hardware.camera.flashlight-service \
+    FlashControl
+
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 

@@ -43,7 +43,6 @@ type sysfs_virtual, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_charger, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_modem, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lcd, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_camera, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_mmc_host_writable, sysfs_type, rw_fs_type, fs_type;
 type sysfs_ss_writable, sysfs_type, rw_fs_type, fs_type;
 type sysfs_usb_writable, sysfs_type, rw_fs_type, fs_type;
