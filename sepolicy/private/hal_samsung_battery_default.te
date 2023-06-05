@@ -1,0 +1,2 @@
+allow hal_samsung_battery_default { sysfs_battery sysfs_battery_writable }:dir search;
+allow hal_samsung_battery_default sysfs_battery_writable:file rw_file_perms;
