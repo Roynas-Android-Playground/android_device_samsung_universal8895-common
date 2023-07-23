@@ -324,6 +324,11 @@ PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # Touch HAL
+ifneq ($(TARGET_DEVICE),dream2lte)
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service
+endif
+
 PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.singletap
 
