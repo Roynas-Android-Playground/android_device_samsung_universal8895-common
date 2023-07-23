@@ -151,7 +151,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.samsung
+    vendor.samsung_ext.hardware.light-service
 
 # Livedisplay
 PRODUCT_PACKAGES += \
@@ -285,8 +285,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.samsung_ext.hardware.camera.flashlight-service \
     vendor.samsung_ext.framework.battery-service \
+    test_lights \
     FlashControl \
-    SmartCharge
+    SmartCharge \
+    CallVolume
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
