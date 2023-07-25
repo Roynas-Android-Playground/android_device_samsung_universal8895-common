@@ -25,6 +25,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Display
 TARGET_SCREEN_DENSITY := 480
@@ -157,8 +158,12 @@ BOARD_HAVE_SAMSUNG_WIFI          := true
 include device/derp/sepolicy/exynos/sepolicy.mk
 BOARD_SEPOLICY_TEE_FLAVOR := mobicore
 include device/samsung_slsi/sepolicy/sepolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private hardware/samsung-ext/interfaces/sepolicy/private
+BOARD_VENDOR_SEPOLICY_DIRS += \
+     $(COMMON_PATH)/sepolicy/vendor \
+     hardware/samsung-ext/interfaces/sepolicy/vendor
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+     $(COMMON_PATH)/sepolicy/private \
+     hardware/samsung-ext/interfaces/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/public
 
 # Ril

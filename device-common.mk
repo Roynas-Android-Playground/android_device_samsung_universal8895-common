@@ -85,7 +85,8 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 PRODUCT_PACKAGES += \
     camera.universal8895 \
     idev0_shim \
-    android.hardware.camera.provider@2.5-service
+    android.hardware.camera.provider@2.5-service \
+    libGrallocWrapper
 
 # Camera configurations
 PRODUCT_COPY_FILES += \
@@ -97,12 +98,10 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0 \
-    android.hardware.drm@1.1 \
     libfwdlockengine \
     libdrmclearkeyplugin \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.4-service.clearkey \
+    android.hardware.drm-service.clearkey \
     android.hardware.drm@1.0-impl
 
 # Fingerprint
@@ -153,7 +152,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.samsung
+    vendor.samsung_ext.hardware.light-service
 
 # Livedisplay
 PRODUCT_PACKAGES += \
@@ -280,16 +279,17 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0 \
-    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-impl.samsung \
     android.hardware.sensors@1.0-service
 
 # Samsung Ext
 PRODUCT_PACKAGES += \
     vendor.samsung_ext.hardware.camera.flashlight-service \
     vendor.samsung_ext.framework.battery-service \
+    test_lights \
     FlashControl \
-    SmartCharge
+    SmartCharge \
+    CallVolume
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
@@ -325,6 +325,11 @@ PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # Touch HAL
+ifneq ($(TARGET_DEVICE),dream2lte)
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service
+endif
+
 PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.singletap
 
