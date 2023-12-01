@@ -331,7 +331,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.singletap
+    vendor.lineage.touch@1.0-service.ss
 
 # USB
 PRODUCT_PACKAGES += \
