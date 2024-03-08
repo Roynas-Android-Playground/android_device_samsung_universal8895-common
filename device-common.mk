@@ -23,6 +23,9 @@ $(call inherit-product, hardware/samsung-ext/interfaces/debug-tools/debug.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
+# APEX
+OVERRIDE_TARGET_FLATTEN_APEX := true
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.service.universal8895 \
@@ -33,6 +36,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libalsautils \
+    libaudioroute \
+    libminijail_32 \
     libeffects \
     libspeexresampler \
     libaudioutils \
@@ -98,11 +103,9 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    libfwdlockengine \
-    libdrmclearkeyplugin \
     android.hardware.drm@1.0-service \
-    android.hardware.drm-service.clearkey \
-    android.hardware.drm@1.0-impl
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm-service.clearkey
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -161,6 +164,10 @@ PRODUCT_PACKAGES += \
 # LPM
 PRODUCT_PACKAGES += \
     libsuspend
+
+# Soft OMX
+PRODUCT_PACKAGES += \
+    libstagefright_soft_g711dec
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -343,6 +350,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Protobuf
 PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v32/arm64/arch-arm-armv8-a/shared/vndk-sp/libhidlbase.so:system/lib/libhidlbase-v32.so \
+    prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:system/lib64/libhidlbase-v32.so \
     prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so \
     prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-core/libprotobuf-cpp-full.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-full-v29.so \
     prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so \
@@ -365,8 +374,8 @@ PRODUCT_PACKAGES += \
     TetheringConfigOverlay \
     wpa_supplicant \
     wpa_supplicant.conf \
-    android.hardware.wifi@1.0-service \
-    android.hardware.wifi@1.0
+    android.hardware.wifi@1.0 \
+    android.hardware.wifi-service
 
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/ramdisk/etc/wifi.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/wifi.rc

@@ -71,12 +71,29 @@ sed -i "s/XTRA_SERVER_2/LONGTERM_PSDS_SERVER_2/" $BLOB_ROOT/etc/gps_debug.conf
 # replace SSLv3_client_method with SSLv23_method
 sed -i "s/SSLv3_client_method/SSLv23_method\x00\x00\x00\x00\x00\x00/" $BLOB_ROOT/vendor/bin/hw/gpsd
 
+# RIL patches
+xxd -p -c0 $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril-dsds.so | sed "s/600e40f9820c8052e10315aae30314aa/600e40f9820c8052e10315aa030080d2/g" | xxd -r -p > $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril-dsds.so.patched
+mv $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril-dsds.so.patched $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril-dsds.so
+
+xxd -p -c0 $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril.so | sed "s/600e40f9820c8052e10315aae30314aa/600e40f9820c8052e10315aa030080d2/g" | xxd -r -p > $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril.so.patched
+mv $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril.so.patched $BLOB_ROOT/proprietary/vendor/lib64/libsec-ril.so
+
 # Audio hal bt sco shim
 "${PATCHELF}" --add-needed libaudioparams_shim.so $BLOB_ROOT/lib/hw/audio.primary.exynos8895.so
 sed -i 's/str_parms_get_str/str_parms_get_mod/g' $BLOB_ROOT/lib/hw/audio.primary.exynos8895.so
 
 # Audio Drop SoundTrigger HAL
 "${PATCHELF}" --remove-needed libaudio_soundtrigger.so $BLOB_ROOT/lib/hw/audio.primary.exynos8895.so
+
+# hidlbase legacy hack
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib/android.hardware.gnss@1.0.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib/vendor.samsung.hardware.gnss@1.0.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib/android.hardware.gnss@1.1.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib/vendor.samsung_slsi.hardware.ExynosHWCServiceTW@1.0.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib64/android.hardware.gnss@1.0.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib64/vendor.samsung.hardware.gnss@1.0.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib64/android.hardware.gnss@1.1.so
+"${PATCHELF}" --replace-needed libhidlbase.so libhidlbase-v32.so $BLOB_ROOT/lib64/vendor.samsung_slsi.hardware.ExynosHWCServiceTW@1.0.so
 
 # HWC wants old libutils
 "${PATCHELF}" --replace-needed libutils.so libutils-v32.so $BLOB_ROOT/vendor/lib64/libexynosdisplay.so
